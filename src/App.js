@@ -5,7 +5,7 @@ import RandomNumber from './RandomNumber';
 function App() {
   return (
     <div style={{ textAlign: 'center' }}>
-      <RandomNumber />
+      <GuessingGame />
     </div>
   );
 }

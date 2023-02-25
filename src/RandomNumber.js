@@ -2,7 +2,7 @@ import React from 'react';
 import useState from 'react';
 import useEffect from 'react';
 
-function RandomNumber() {
+const RandomNumber = () => {
     const [ randomNumber, saveRandomNumber ] = useState(null);
 
     useEffect(() => {
@@ -18,8 +18,8 @@ function RandomNumber() {
         localStorage.setItem("randomNum", JSON.stringify(randomNum));
         return randomNum
     }
-    const desplayNum = RandomNumber.toString;
-    return desplayNum
+    
+    return RandomNumber
 }
 
 export default RandomNumber
