@@ -1,4 +1,5 @@
 import React from 'react';
+import RandomNumber from './RandomNumber';
 
 function GuessingGame() {
     return (

@@ -11,13 +11,15 @@ function RandomNumber() {
                 JSON.parse(localStorage.getItem("randomNum")) || makeRandomNum()
             )
         }
-    })
+    }, []);
 
     function makeRandomNum() {
         let randomNum = Math.floor(Math.random() * 100);
         localStorage.setItem("randomNum", JSON.stringify(randomNum));
         return randomNum
     }
+    const desplayNum = RandomNumber.toString;
+    return desplayNum
 }
 
 export default RandomNumber
