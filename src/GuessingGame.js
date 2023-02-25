@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import RandomNumber from './RandomNumber';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import './App.css';
 
 function GuessingGame() {
     const [guessAttempts, saveGuessAttempts] = useState(null);
     const [userGuess, saveUserGuess] = useState("");
+    const [ hint, generateHint ] = useState("Try To Guess The Number");
 
-    const RandomNumber = () => {
         const [ randomNumber, saveRandomNumber ] = useState(null);
     
         useEffect(() => {
@@ -23,9 +24,6 @@ function GuessingGame() {
             localStorage.setItem("randomNum", JSON.stringify(randomNum));
             return randomNum
         }
-        return <p>{randomNumber}</p>
-        
-    }
 
     useEffect(() => {
         if (guessAttempts === null) {
@@ -39,21 +37,50 @@ function GuessingGame() {
         saveUserGuess(event.target.value)
     }
 
+    
+
     function buttonClickEvent(event) {
             event.preventDefault();
+            let fixedNumber = parseInt(userGuess);
+            saveGuessAttempts(guessAttempts + 1);
+            localStorage.setItem("numOfGuesses", JSON.stringify(guessAttempts + 1))
 
+            if ( fixedNumber === randomNumber ) {
+                generateHint("You guessed the Lucky Number")
+            } else if ( fixedNumber > randomNumber ) {
+                generateHint("Your guess is to high")
+            } else if ( fixedNumber < randomNumber ) {
+                generateHint("Your guess is to low")
+            } else {
+                generateHint("Enter Only A Number")
+            }
     }
+
+function wipeLocalStorage() {
+    saveGuessAttempts(0);
+    saveUserGuess("");
+    generateHint("Try To Guess The Number");
+    saveRandomNumber(makeRandomNum());
+    localStorage.removeItem("numOfGuesses");
+}
 
     return (
         <div>
-            <h2>I am thinking of a number between 1 and 100. Guess the Lucky Number!</h2>
-            <Form>
-                <Form.Group className="mb-3">
-                    <Form.Control type="text" value={userGuess} placeholder="Enter Your Guess Here" onChange={makeTypingWork}/>
-                    <Form.Label>You have made {guessAttempts} attempts.</Form.Label>
-                    <Button type="submit">Guess</Button>
+            <h3 className='upperhead'>I am thinking of a number between 1 and 100.</h3>
+            <br />
+            <h3 className='lowerhead'>Guess the Lucky Number!</h3>
+            <div className='appContainer'>
+            <Form onSubmit={buttonClickEvent}>
+                <Form.Group>
+                    <Row className='align-items-center'>
+                    <Form.Control type="text" value={userGuess} placeholder="Enter Your Guess Here" onChange={makeTypingWork}/><Button type="submit">Guess</Button>
+                    </Row>
                 </Form.Group>
+                <Form.Label>{hint}</Form.Label>
+                <Form.Label>You have made {guessAttempts} guesses.</Form.Label>
             </Form>
+            <Button onClick={wipeLocalStorage} type="button">Reset</Button>
+            </div>
         </div>
     )
 }

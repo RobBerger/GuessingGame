@@ -1,0 +1,17 @@
+.appContainer {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
+}
+
+.upperhead {
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.lowerhead {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 25px;
+}
