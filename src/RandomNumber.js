@@ -1,6 +1,4 @@
-import React from 'react';
-import useState from 'react';
-import useEffect from 'react';
+import React, { useState, useEffect } from 'react';
 
 const RandomNumber = () => {
     const [ randomNumber, saveRandomNumber ] = useState(null);
@@ -18,8 +16,8 @@ const RandomNumber = () => {
         localStorage.setItem("randomNum", JSON.stringify(randomNum));
         return randomNum
     }
-    console.log(RandomNumber);
-    return RandomNumber
+    return <p>{randomNumber}</p>
+    
 }
 
 export default RandomNumber
