@@ -18,7 +18,7 @@ const RandomNumber = () => {
         localStorage.setItem("randomNum", JSON.stringify(randomNum));
         return randomNum
     }
-    
+    console.log(RandomNumber);
     return RandomNumber
 }
 
