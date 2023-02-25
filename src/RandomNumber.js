@@ -1,7 +1,17 @@
 import React from 'react';
+import useState from 'react';
+import useEffect from 'react';
 
 function RandomNumber() {
-    const [ randomNumber, setRandomNumber ] = useState('null');
+    const [ randomNumber, saveRandomNumber ] = useState(null);
+
+    useEffect(() => {
+        if (randomNumber === null) {
+            saveRandomNumber(
+                JSON.parse(localStorage.getItem("randomNum")) || makeRandomNum()
+            )
+        }
+    })
 
     function makeRandomNum() {
         let randomNum = Math.floor(Math.random() * 100);
